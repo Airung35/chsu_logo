@@ -9,7 +9,7 @@ internal class DeepLinkResolverImpl : DeepLinkResolver {
     companion object {
         private val HomeRegex = "kmptemplate://home".toRegex()
         private val ProfileRegex = "kmptemplate://profile".toRegex()
-        private val SecondScreenRegex = "kmptemplate://home/second".toRegex()
+        private val SecondScreenRegex = "kmptemplate://home/second(\\?difficulty=(.+))*".toRegex()
         private val ThirdScreenRegexWithQueryParam = "kmptemplate://home/third(\\?arg=(.+))*".toRegex()
         private val ThirdScreenRegexWithPathParam = "kmptemplate://home/third/(?<arg>.+)".toRegex()
     }
@@ -28,7 +28,8 @@ internal class DeepLinkResolverImpl : DeepLinkResolver {
             }
 
             SecondScreenRegex.toDeepLink(uri)?.let {
-                return@run DeepLinkDestination.SecondScreen
+                val argument = it.queryParameter("difficulty") ?: return null
+                return@run DeepLinkDestination.SecondScreen(argument)
             }
 
             ThirdScreenRegexWithQueryParam.toDeepLink(uri)?.let {

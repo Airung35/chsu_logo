@@ -18,9 +18,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreen
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondViewState
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 
@@ -29,11 +32,14 @@ fun SecondScreenUi(
     screen: SecondScreen,
     modifier: Modifier = Modifier,
 ) {
-    Content(actions = screen.actions, modifier = modifier)
+    val actions = screen.actions
+    val viewState by screen.viewState.collectAsStateWithLifecycle()
+    Content(viewState = viewState, actions = screen.actions, modifier = modifier)
 }
 
 @Composable
 private fun Content(
+    viewState: SecondViewState,
     actions: SecondScreen.Actions,
     modifier: Modifier = Modifier,
 ) {

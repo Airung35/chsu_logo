@@ -9,7 +9,7 @@ sealed class DeepLinkDestination {
 
     data object ProfileTab : DeepLinkDestination()
 
-    data object SecondScreen : DeepLinkDestination()
+    data class SecondScreen(val difficulty: String) : DeepLinkDestination()
 
     data class ThirdScreen(val argument: String) : DeepLinkDestination()
 }

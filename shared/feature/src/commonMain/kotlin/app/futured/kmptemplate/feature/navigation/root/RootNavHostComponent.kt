@@ -9,6 +9,7 @@ import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHostCompon
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginComponentFactory
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenArgs
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.activate
@@ -80,7 +81,7 @@ internal class RootNavHostComponent(
         val deepLinkConfig = when (deepLink) {
             DeepLinkDestination.HomeTab -> RootConfig.deepLinkHome()
             DeepLinkDestination.ProfileTab -> RootConfig.deepLinkProfile()
-            DeepLinkDestination.SecondScreen -> RootConfig.deepLinkSecondScreen()
+            is DeepLinkDestination.SecondScreen -> RootConfig.deepLinkSecondScreen(SecondScreenArgs(deepLink.difficulty))
             is DeepLinkDestination.ThirdScreen -> RootConfig.deepLinkThirdScreen(ThirdScreenArgs(deepLink.argument))
         }
         rootNavigator.slotNavigator.activate(deepLinkConfig)

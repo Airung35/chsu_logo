@@ -1,3 +1,3 @@
 package app.futured.kmptemplate.feature.ui.secondScreen
 
-data object SecondViewState
+data class SecondViewState(val difficulty: String)

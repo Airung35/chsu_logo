@@ -7,6 +7,7 @@ import app.futured.kmptemplate.feature.ui.picker.PickerNavigation
 import app.futured.kmptemplate.feature.ui.picker.PickerType
 import app.futured.kmptemplate.feature.ui.picker.DifficultyPickerComponent
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponent
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenArgs
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenNavigation
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponent
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
@@ -32,8 +33,8 @@ internal class HomeNavigator : HomeNavHostNavigation {
     override val stackNavigator = StackNavigation<HomeConfig>()
     override val sheetNavigator = SlotNavigation<HomeSheetConfig>()
 
-    override fun FirstComponent.navigateToSecond() =
-        stackNavigator.pushNew(HomeConfig.Second)
+    override fun FirstComponent.navigateToSecond(difficulty: String) =
+        stackNavigator.pushNew(HomeConfig.Second(SecondScreenArgs(difficulty)))
 
     override fun FirstComponent.navigateToThird(id: String) =
         stackNavigator.pushNew(HomeConfig.Third(ThirdScreenArgs(id)))

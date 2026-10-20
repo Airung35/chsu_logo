@@ -12,9 +12,10 @@ import org.koin.core.annotation.InjectedParam
 internal class SecondComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: SecondScreenNavigation,
+    @InjectedParam args: SecondScreenArgs,
 ) : ScreenComponent<SecondViewState, Nothing, SecondScreenNavigation>(
     componentContext = componentContext,
-    defaultState = SecondViewState,
+    defaultState = SecondViewState(difficulty = args.difficulty),
 ),
     SecondScreen,
     SecondScreenNavigation by navigation,

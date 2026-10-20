@@ -5,7 +5,7 @@ import app.futured.kmptemplate.feature.ui.picker.PickerArgs
 import app.futured.kmptemplate.feature.ui.picker.PickerType
 
 internal interface FirstScreenNavigation : NavigationActions {
-    fun FirstComponent.navigateToSecond()
+    fun FirstComponent.navigateToSecond(difficulty: String)
 
     fun FirstComponent.navigateToThird(id: String)
 

@@ -21,16 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.futured.kmptemplate.android.ui.components.Showcase
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen
-import app.futured.kmptemplate.feature.ui.picker.PickerScreen.Actions.Companion.noOpActions
 import app.futured.kmptemplate.feature.ui.picker.PickerState
-import app.futured.kmptemplate.feature.ui.picker.pickerStatePreviews
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
 import app.futured.kmptemplate.resources.localized
@@ -101,20 +95,4 @@ private fun Content(
             }
         }
     }
-}
-
-private class PickerUiPreviewProvider : PreviewParameterProvider<PickerState> {
-    override val values: Sequence<PickerState> = pickerStatePreviews().asSequence()
-}
-
-@Preview
-@Composable
-private fun PickerUiPreview(
-    @PreviewParameter(PickerUiPreviewProvider::class) state: PickerState,
-) = Showcase {
-    Content(
-        viewState = state,
-        actions = noOpActions(),
-        modifier = Modifier.fillMaxWidth(),
-    )
 }

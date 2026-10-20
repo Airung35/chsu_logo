@@ -43,7 +43,7 @@ internal class FirstComponent(
     }
     private fun collectPickerResults() {
         pickerResults
-            .onEach { selection -> navigateToSecond() }
+            .onEach { selection -> navigateToSecond(selection) }
             .launchIn(lifecycleScope)
     }
 }

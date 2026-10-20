@@ -5,6 +5,7 @@ import app.futured.kmptemplate.feature.navigation.profile.ProfileConfig
 import app.futured.kmptemplate.feature.navigation.signedIn.SignedInConfig
 import app.futured.kmptemplate.feature.navigation.signedIn.SignedInNavHost
 import app.futured.kmptemplate.feature.ui.loginScreen.LoginScreen
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenArgs
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import com.arkivanov.decompose.router.slot.ChildSlot
 import kotlinx.coroutines.flow.StateFlow
@@ -53,16 +54,16 @@ sealed interface RootConfig {
             seed = newSeed(),
         )
 
-        fun deepLinkSecondScreen(): RootConfig = RootConfig.SignedIn(
+        fun deepLinkSecondScreen(argsSecond: SecondScreenArgs,): RootConfig = RootConfig.SignedIn(
             initialConfig = SignedInConfig.Home(
-                initialStack = listOf(HomeConfig.First, HomeConfig.Second),
+                initialStack = listOf(HomeConfig.First, HomeConfig.Second(argsSecond)),
             ),
             seed = newSeed(),
         )
 
-        fun deepLinkThirdScreen(args: ThirdScreenArgs): RootConfig = RootConfig.SignedIn(
+        fun deepLinkThirdScreen(argsThird: ThirdScreenArgs): RootConfig = RootConfig.SignedIn(
             initialConfig = SignedInConfig.Home(
-                initialStack = listOf(HomeConfig.First, HomeConfig.Second, HomeConfig.Third(args)),
+                initialStack = listOf(HomeConfig.First, HomeConfig.Third(argsThird)),
             ),
             seed = newSeed(),
         )

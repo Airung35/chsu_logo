@@ -5,6 +5,7 @@ import app.futured.kmptemplate.feature.ui.picker.PickerArgs
 import app.futured.kmptemplate.feature.ui.picker.PickerScreen
 import app.futured.kmptemplate.feature.ui.picker.PickerType
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreen
+import app.futured.kmptemplate.feature.ui.secondScreen.SecondScreenArgs
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreen
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdScreenArgs
 import com.arkivanov.decompose.Child
@@ -34,7 +35,7 @@ sealed interface HomeConfig {
     data object First : HomeConfig
 
     @Serializable
-    data object Second : HomeConfig
+    data class Second(val args: SecondScreenArgs) : HomeConfig
 
     @Serializable
     data class Third(val args: ThirdScreenArgs) : HomeConfig

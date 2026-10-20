@@ -46,10 +46,11 @@ internal class HomeNavHostComponent(
                     ),
                 )
 
-                HomeConfig.Second -> HomeChild.Second(
+                is HomeConfig.Second -> HomeChild.Second(
                     SecondComponentFactory.createComponent(
                         componentContext = childCtx,
                         navigation = homeNavigator,
+                        args = config.args,
                     ),
                 )
 
