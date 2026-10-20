@@ -5,9 +5,8 @@ import app.futured.arkitekt.decompose.ext.asStateFlow
 import app.futured.kmptemplate.feature.ui.base.AppComponent
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.firstScreen.FirstComponentFactory
-import app.futured.kmptemplate.feature.ui.picker.FruitPickerComponentFactory
+import app.futured.kmptemplate.feature.ui.picker.DifficultyPickerComponentFactory
 import app.futured.kmptemplate.feature.ui.picker.PickerType
-import app.futured.kmptemplate.feature.ui.picker.VegetablePickerComponentFactory
 import app.futured.kmptemplate.feature.ui.secondScreen.SecondComponentFactory
 import app.futured.kmptemplate.feature.ui.thirdScreen.ThirdComponentFactory
 import com.arkivanov.decompose.Child
@@ -75,16 +74,8 @@ internal class HomeNavHostComponent(
             when (config) {
                 is HomeSheetConfig.Picker -> {
                     when (config.pickerType) {
-                        PickerType.Fruit -> HomeSheetChild.Picker(
-                            FruitPickerComponentFactory.createComponent(
-                                componentContext = childCtx,
-                                navigation = homeNavigator,
-                                args = config.args,
-                            ),
-                        )
-
-                        PickerType.Vegetable -> HomeSheetChild.Picker(
-                            VegetablePickerComponentFactory.createComponent(
+                        PickerType.Difficulty -> HomeSheetChild.Picker(
+                            DifficultyPickerComponentFactory.createComponent(
                                 componentContext = childCtx,
                                 navigation = homeNavigator,
                                 args = config.args,

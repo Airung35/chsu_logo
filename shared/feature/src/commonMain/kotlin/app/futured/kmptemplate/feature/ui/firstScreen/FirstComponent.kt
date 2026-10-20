@@ -1,32 +1,25 @@
 package app.futured.kmptemplate.feature.ui.firstScreen
 
 import app.futured.arkitekt.annotation.GenerateFactory
-import app.futured.arkitekt.crusecases.execute
-import app.futured.kmptemplate.feature.domain.CounterUseCase
-import app.futured.kmptemplate.feature.domain.CounterUseCaseArgs
-import app.futured.kmptemplate.feature.domain.SyncDataUseCase
+import app.futured.arkitekt.decompose.navigation.resultFlow
+import app.futured.kmptemplate.feature.navigation.result.NavigationResultKeys
 import app.futured.kmptemplate.feature.ui.base.AppComponentContext
 import app.futured.kmptemplate.feature.ui.base.ScreenComponent
-import app.futured.kmptemplate.resources.MR
-import app.futured.kmptemplate.resources.datetime.desc
-import co.touchlab.kermit.Logger
+import app.futured.kmptemplate.feature.ui.picker.PickerArgs
+import app.futured.kmptemplate.feature.ui.picker.PickerType
 import com.arkivanov.essenty.lifecycle.doOnCreate
-import dev.icerock.moko.resources.format
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-import kotlin.time.Clock
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.InjectedParam
-import kotlin.time.Duration.Companion.milliseconds
 
 @Factory
 @GenerateFactory
 internal class FirstComponent(
     @InjectedParam componentContext: AppComponentContext,
     @InjectedParam override val navigation: FirstScreenNavigation,
-    private val syncDataUseCase: SyncDataUseCase,
-    private val counterUseCase: CounterUseCase,
-) : ScreenComponent<FirstViewState, FirstUiEvent, FirstScreenNavigation>(
+) : ScreenComponent<FirstViewState, Nothing, FirstScreenNavigation>(
     componentContext = componentContext,
     defaultState = FirstViewState(),
 ),
@@ -34,56 +27,23 @@ internal class FirstComponent(
     FirstScreenNavigation by navigation,
     FirstScreen.Actions {
 
-    companion object {
-        private const val COUNTER_ALERT_AT_SECONDS = 30L
-    }
-
-    private val logger = Logger.withTag("FirstComponent")
-
     override val viewState: StateFlow<FirstViewState> = componentState
     override val actions: FirstScreen.Actions = this
+    private val pickerResults = resultFlow(NavigationResultKeys.Picker)
+
+
+    override fun onPickMemo() = openPicker(PickerType.Difficulty, PickerArgs(NavigationResultKeys.Picker))
+
+    override fun onPickMemoBuilder() = navigateToThird("hello third")
 
     init {
-        doOnCreate {
-            syncData()
-            observeCounter()
-            updateCreatedAtTimestamp()
+        lifecycle.doOnCreate {
+            collectPickerResults()
         }
     }
-
-    override fun onNext() = navigateToSecond()
-
-    private fun syncData() = syncDataUseCase.execute {
-        onSuccess { person ->
-            componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format(person.name.orEmpty())) }
-        }
-        onError { error ->
-            componentState.update { it.copy(randomPerson = MR.strings.first_screen_random_person.format("Failed to fetch")) }
-            logger.e(error) { error.message.toString() }
-        }
-    }
-
-    private fun observeCounter() = counterUseCase.execute(CounterUseCaseArgs(interval = 200.milliseconds)) {
-        onNext { count ->
-            updateCount(count)
-
-            if (count == COUNTER_ALERT_AT_SECONDS) {
-                logger.d { "Counter reached 10" }
-                sendUiEvent(FirstUiEvent.ShowToast(MR.strings.first_screen_counter_alert.format(COUNTER_ALERT_AT_SECONDS)))
-            }
-        }
-        onError { error ->
-            logger.e(error) { "Counter error" }
-        }
-    }
-
-    private fun updateCount(count: Long) {
-        componentState.update { it.copy(counter = MR.strings.first_screen_counter.format(count)) }
-    }
-
-    private fun updateCreatedAtTimestamp() {
-        componentState.update {
-            it.copy(createdAt = MR.strings.first_screen_created_at.format(Clock.System.now().desc("Hms")))
-        }
+    private fun collectPickerResults() {
+        pickerResults
+            .onEach { selection -> navigateToSecond() }
+            .launchIn(lifecycleScope)
     }
 }

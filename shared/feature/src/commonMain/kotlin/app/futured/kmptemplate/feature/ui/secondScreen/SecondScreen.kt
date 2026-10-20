@@ -9,7 +9,5 @@ interface SecondScreen {
 
     interface Actions {
         fun onBack()
-        fun onPickFruit()
-        fun onPickVeggie()
     }
 }

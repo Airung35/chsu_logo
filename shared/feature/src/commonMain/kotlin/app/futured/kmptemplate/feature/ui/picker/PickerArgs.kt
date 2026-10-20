@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 data class PickerArgs(val resultKey: ResultKey<String>)
 
 enum class PickerType {
-    Fruit,
-    Vegetable,
+    Difficulty
 }
+
