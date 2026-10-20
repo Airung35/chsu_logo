@@ -34,7 +34,7 @@ internal class ProfileNavHostComponent(
         childFactory = { config, childCtx ->
             when (config) {
                 ProfileConfig.Profile -> ProfileChild.Profile(ProfileComponentFactory.createComponent(childCtx, navigator))
-                is ProfileConfig.Third -> ProfileChild.Third(ThirdComponentFactory.createComponent(childCtx, navigator, config.args))
+                is ProfileConfig.Third -> ProfileChild.Third(ThirdComponentFactory.createComponent(childCtx, navigator))
             }
         },
     ).asStateFlow()

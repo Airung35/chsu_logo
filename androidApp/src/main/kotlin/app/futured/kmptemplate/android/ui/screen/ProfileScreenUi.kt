@@ -2,10 +2,8 @@ package app.futured.kmptemplate.android.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -16,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.futured.kmptemplate.feature.ui.profileScreen.ProfileScreen
 import app.futured.kmptemplate.resources.MR
 import app.futured.kmptemplate.resources.kmpStringResource
@@ -53,10 +50,6 @@ private fun Content(
         ) {
             Button(onClick = actions::onLogout) {
                 Text(kmpStringResource(MR.strings.generic_sign_out))
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = actions::onThird) {
-                Text(kmpStringResource(MR.strings.profile_navigate_to_third))
             }
         }
     }

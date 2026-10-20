@@ -65,7 +65,7 @@ private fun Content(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = viewState.text.localized())
+            Text(text = "В разработке")
         }
     }
 }

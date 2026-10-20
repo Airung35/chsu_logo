@@ -58,7 +58,6 @@ internal class HomeNavHostComponent(
                     ThirdComponentFactory.createComponent(
                         componentContext = childCtx,
                         navigation = homeNavigator,
-                        args = config.args,
                     ),
                 )
             }
