@@ -1,0 +1,34 @@
+# Task name: assembleAndCopy[Debug|Release]SwiftPackage
+ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), debug)
+    GRADLE_TASK := assembleAndCopyDebugSwiftPackage
+else ifeq ($(KMP_FRAMEWORK_BUILD_TYPE), release)
+    GRADLE_TASK := assembleAndCopyReleaseSwiftPackage
+else
+    $(error KMP_FRAMEWORK_BUILD_TYPE must be 'debug' or 'release')
+endif
+
+GRADLE_ARGS := -Pbuildkonfig.flavor=$(KMP_BUILD_FLAVOR) -PkmpFrameworkTargets=$(KMP_FRAMEWORK_TARGETS)
+
+# KMP_IS_STATIC controls static vs dynamic framework linking.
+# Dynamic (false) is used in Debug builds to enable SwiftUI previews.
+# Static (true) is used in Beta and Release builds.
+# Defaults to static (true) in Gradle if not explicitly set.
+ifdef KMP_IS_STATIC
+    GRADLE_ARGS += -PisStatic=$(KMP_IS_STATIC)
+endif
+
+all: build
+
+build:
+	@echo "------------------------------------------------"
+	@echo "Build type: $(KMP_FRAMEWORK_BUILD_TYPE) | API Flavor: $(KMP_BUILD_FLAVOR) | Kotlin Native Targets: $(KMP_FRAMEWORK_TARGETS) | Static: $(KMP_IS_STATIC)"
+	@echo "Executing: ./gradlew $(GRADLE_TASK) $(GRADLE_ARGS)"
+	@echo "------------------------------------------------"
+	cd ../../.. && \
+	./gradlew $(GRADLE_TASK) --no-daemon $(GRADLE_ARGS)
+
+clean:
+	cd ../../.. && \
+	./gradlew clean
+
+.PHONY: all build clean

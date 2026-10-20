@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App -->
+    <string name="template_app_name">Futured KMP Template</string>
+
+    <!-- Generic -->
+    <string name="generic_close">Close</string>
+    <string name="generic_sign_in">Sign In</string>
+    <string name="generic_sign_out">Sign Out</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_profile">Profile</string>
+
+    <!-- Login -->
+    <string name="login_screen_title">Welcome to the sample app!</string>
+
+    <!-- First screen -->
+    <string name="first_screen_title">First screen</string>
+    <string name="first_screen_counter">Counter: %1$s</string>
+    <string name="first_screen_counter_alert">Counter reached %1$s 🎉</string>
+    <string name="first_screen_button">Continue</string>
+    <string name="first_screen_random_person">Random Star Wars character:\n%1$s</string>
+    <string name="first_screen_created_at">Created at: %1$s</string>
+
+    <!-- Second screen -->
+    <string name="second_screen_title">Second screen</string>
+    <string name="second_screen_button_fruit">Pick a fruit</string>
+    <string name="second_screen_button_veggie">Pick a veggie</string>
+
+    <!-- Picker -->
+    <string name="picker_title">Pick an item!</string>
+    <string name="veggie_carrot">🥕 Carrot</string>
+    <string name="veggie_pepper">🫑 Pepper</string>
+    <string name="veggie_onion">🧅 Onion</string>
+    <string name="veggie_chilli">🌶 Chilli</string>
+    <string name="fruit_apple">🍎 Apple</string>
+    <string name="fruit_banana">🍌 Banana</string>
+    <string name="fruit_orange">🍊 Orange</string>
+
+    <!-- Third screen -->
+    <string name="third_screen_title">Third screen</string>
+    <string name="third_screen_text">Screen argument: %1$s</string>
+
+    <!-- Profile screen -->
+    <string name="profile_screen_title">Profile</string>
+    <string name="profile_navigate_to_third">Navigate to third</string>
+</resources>
