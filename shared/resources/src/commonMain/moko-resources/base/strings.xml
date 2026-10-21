@@ -23,6 +23,7 @@
 
     <!-- Second screen -->
     <string name="second_screen_title">Мемори</string>
+    <string name="second_screen_victory_game">Победа за %1$d ходов!</string>
 
     <!-- Picker -->
     <string name="picker_title">Выберите сложность</string>

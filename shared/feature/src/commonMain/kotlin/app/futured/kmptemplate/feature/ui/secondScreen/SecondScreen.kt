@@ -9,5 +9,6 @@ interface SecondScreen {
 
     interface Actions {
         fun onBack()
+        fun onCardClick(cardId: Int)
     }
 }
